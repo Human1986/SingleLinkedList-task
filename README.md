@@ -3,7 +3,7 @@
 The purpose of this exercise is to describe, create, and use lists that are built according to special rules.
 
 
-Duration: _60 minutes_
+Duration - **1 hours**
 
 
 ## Description
@@ -39,7 +39,7 @@ Now, please proceed to the [SingleLinkedListImpl](src/main/java/com/epam/rd/auto
 *	You can add any private methods to the `SinglyLinkedListImpl` class.
 
 
-### Restrictions
+## Restrictions
 You may not: 
 * Use any type from the `java.util` package (or its subpackages) except for: 
   * `java.util.Iterator`
