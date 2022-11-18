@@ -3,7 +3,7 @@
 The purpose of this exercise is to describe, create, and use lists that are built according to special rules.
 
 
-Duration - **1 hours**
+Duration: **1 hours**
 
 
 ## Description
