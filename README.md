@@ -3,13 +3,13 @@
 The purpose of this exercise is to describe, create, and use lists that are built according to special rules.
 
 
-Duration: _60 minutes_
+Duration: **1 hours**
 
 
 ## Description
 
 In this task, you will describe a unidirectional list based on a linked representation. The internal structure of the list is a node chain (nested class Node) where each node encapsulates a list element and has a reference to another similar node. The node chain starts with a header element that stores the number of elements in the list. The last node in the list is not linked to any other node and has a null reference.
-Now, please proceed to the [SingleLinkedListImpl](src/main/java/com/epam/rd/autocode/collection/list/SingleLinkedListImpl.java) class, which implements the [List](src/main/java/com/epam/rd/autocode/collection/list/List.java) interface, and provide implementations of the following methods:
+Now, please proceed to the `SingleLinkedListImpl` class, which implements the `List` interface, and provide implementations of the following methods:
 
 * `void clear()`   
    Removes all elements from the list
@@ -27,9 +27,10 @@ Now, please proceed to the [SingleLinkedListImpl](src/main/java/com/epam/rd/auto
    Finds and returns an element from the list by index
 
 *	`Iterator<Object> iterator()` 
-   Returns an iterator for the list
-*`String toString()` 
-  Makes a string representation of the list
+   Returns an iterator for the list  
+
+* `String toString()` 
+   Makes a string representation of the list
 
 ### Details:
 *	The list is created by the default constructor, which creates a header and sets the list's element count to zero.
@@ -39,7 +40,7 @@ Now, please proceed to the [SingleLinkedListImpl](src/main/java/com/epam/rd/auto
 *	You can add any private methods to the `SinglyLinkedListImpl` class.
 
 
-### Restrictions
+## Restrictions
 You may not: 
 * Use any type from the `java.util` package (or its subpackages) except for: 
   * `java.util.Iterator`
