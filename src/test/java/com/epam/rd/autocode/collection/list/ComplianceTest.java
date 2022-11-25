@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ComplianceTest {
 
-    private static final java.util.Set<String> FORBIDDEN_CLASSES = new TreeSet<>(asList(
+    private static final java.util.Set<String> ALLOWED_CLASSES = new TreeSet<>(asList(
             "java.util.Iterator",
             "java.util.NoSuchElementException",
             "java.util.Objects",
@@ -49,9 +49,14 @@ public class ComplianceTest {
                 .sorted()
                 .toList();
 
-        assertIterableEquals(FORBIDDEN_CLASSES, types,
-                () -> "You can use exactly specified types from java.util package and its subpackages: \n" +
-                        FORBIDDEN_CLASSES + " but found \n" + types);
+        assertTrue(types.size() <= ALLOWED_CLASSES.size(),
+                "You can use exactly specified types from 'java.util.*'" +
+                        " packages and theirs subpackages:\nexpected: " +
+                        ALLOWED_CLASSES + "\nbut found " + types  + "\n");
+        types.forEach(t -> assertTrue(ALLOWED_CLASSES.contains(t),
+                "You can use exactly specified types from 'java.util.*'" +
+                        " packages and theirs subpackages:\nexpected: " +
+                        ALLOWED_CLASSES + "\nbut found " + types  + "\n"));
     }
 
     @Test
