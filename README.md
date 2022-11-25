@@ -8,7 +8,7 @@ Duration: **1 hours**
 
 ## Description
 
-In this task, you will describe a unidirectional list based on a linked representation. The internal structure of the list is a node chain (nested class Node) where each node encapsulates a list element and has a reference to another similar node. The node chain starts with a header element that stores the number of elements in the list. The last node in the list is not linked to any other node and has a null reference.
+In this task, you will describe a unidirectional list based on a linked representation. The internal structure of the list is a node chain (nested class `Node`) where each node encapsulates a list element and has a reference to another similar node. The node chain starts with a header element that stores the number of elements in the list. The last node in the list is not linked to any other node and has a null reference.
 Now, please proceed to the `SingleLinkedListImpl` class, which implements the `List` interface, and provide implementations of the following methods:
 
 * `void clear()`   
