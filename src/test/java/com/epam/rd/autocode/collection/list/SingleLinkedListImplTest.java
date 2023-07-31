@@ -4,6 +4,7 @@ import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -31,8 +32,8 @@ class SingleLinkedListImplTest {
         list.add(1);
         list.add(2);
         list.add(3);
-        assertEquals(3, list.get(2));
-        assertEquals(Optional.of(1), list.remove(1));
+        assertEquals(1, list.get(2));
+        assertEquals(Optional.of(3), list.remove(3));
         assertEquals( 2, list.get(0));
     }
 
@@ -52,7 +53,7 @@ class SingleLinkedListImplTest {
         list.add(2);
         assertIterableEquals(asList(2, 1), list,
                 "The list must not accept null values");
-        assertEquals(2, list.get(1));
+        assertEquals(1, list.get(1));
     }
 
     @Test
@@ -83,6 +84,8 @@ class SingleLinkedListImplTest {
         assertIterableEquals(asList(2), list);
         assertEquals(Optional.of(2), list.remove(2));
         assertIterableEquals(asList(), list);
+        assertEquals(Optional.empty(), list.remove(2));
+        assertIterableEquals(asList(), list);
     }
 
     @Test
@@ -107,6 +110,9 @@ class SingleLinkedListImplTest {
         list.add(3);
         String actual = list.toString();
         assertEquals("[3, 2, 1]", actual,
+                "Actual: '" + actual + "'");
+        actual = new SingleLinkedListImpl().toString();
+        assertEquals("[]", actual,
                 "Actual: '" + actual + "'");
     }
 
@@ -217,5 +223,14 @@ class SingleLinkedListImplTest {
         it.remove();
         assertIterableEquals(asList(2,3,1), a,
                 "Must remove last returned element. Actual: " + a);
+        assertEquals(3, a.size(),
+                "Remove must change the size of the list.");
+    }
+
+    @Test
+    void testIterator8() {
+        assertThrows(NoSuchElementException.class, () -> new SingleLinkedListImpl().iterator().next(),
+                "'it.next()' must throw 'NoSuchElementException' " +
+                        "if there is no element for iterations");
     }
 }

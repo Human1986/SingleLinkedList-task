@@ -30,10 +30,11 @@ public interface List extends Iterable<Object> {
      * If the list does not contain the element, it is unchanged.
      * More formally, removes the first element {@code el} such that
      * {@code Objects.equals(o, el) == true} (if such an element exists).
-     * Returns {@code true} if this list was changed or {@code false} otherwise.
+     * Returns the object wrapped by {@code Optional} if this list was changed or {@code Optional.empty} otherwise.
      *
      * @param element the element to be removed from this list, if present
-     * @return {@code true} if an element was removed as a result of this call, {@code false} otherwise.
+     * @return element wrapped by {@code Optional} if an element was removed as a result of this call,
+     * {@code Optional.empty} otherwise.
      */
     Optional<Object> remove(Object element);
 
@@ -42,7 +43,7 @@ public interface List extends Iterable<Object> {
      *
      * @return an element
      * @throws IndexOutOfBoundsException if the index is out of range. More formally,
-     *                                   if {@code index < o || index >= size()}
+     *                                   if {@code index < 0 || index >= size()}
      */
     Object get(int index);
 
