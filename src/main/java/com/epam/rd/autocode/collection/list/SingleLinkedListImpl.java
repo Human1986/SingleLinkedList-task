@@ -6,41 +6,24 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class SingleLinkedListImpl implements List {
+    private final Node head;
+    int size;
 
-    private Node head;
-
-    private static class Node {
-        Object data;
-        Node next;
-
-        Node(Object data) {
-            this.data = data;
-        }
-
-        Node(Object data, Node next) {
-            this.data = data;
-            this.next = next;
-        }
-
-        @Override
-        public String toString() {
-            return "[" + data + ']';
-        }
-    }
 
     public SingleLinkedListImpl() {
         head = new Node(0, null);
     }
 
+
     @Override
     public void clear() {
-       // place tour code here
+        head.next = null;
+        size = 0;
     }
 
     @Override
     public int size() {
-        // place tour code here
-        return 0;
+        return size;
     }
 
     /**
@@ -51,20 +34,47 @@ public class SingleLinkedListImpl implements List {
      */
     @Override
     public boolean add(Object el) {
-        // place tour code here
+        if (el == null) {
+            throw new NullPointerException();
+        }
+        head.next = new Node(el, head.next);
+        size++;
+
         return true;
     }
 
     @Override
     public Optional<Object> remove(Object el) {
-        // place tour code here
-        return null;
+        if (el == null) {
+            throw new NullPointerException();
+        }
+
+        Node current = head;
+        while (current.next != null) {
+            if (Objects.equals(current.next.data, el)) {
+                Node removedNode = current.next;
+                current.next = current.next.next;
+                size--;
+                return Optional.of(removedNode.data);
+            }
+            current = current.next;
+        }
+
+        return Optional.empty();
     }
 
     @Override
     public Object get(int index) {
-        // place tour code here
-        return null;
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        Node current = head.next;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+
+        return current.data;
     }
 
     /**
@@ -76,8 +86,18 @@ public class SingleLinkedListImpl implements List {
      */
     @Override
     public String toString() {
-        // place tour code here
-        return null;
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        Node current = head.next;
+        while (current != null) {
+            sb.append(current.data);
+            if (current.next != null) {
+                sb.append(", ");
+            }
+            current = current.next;
+        }
+        sb.append("]");
+        return sb.toString();
     }
 
     /**
@@ -94,7 +114,57 @@ public class SingleLinkedListImpl implements List {
      */
     @Override
     public Iterator<Object> iterator() {
-        // place tour code here
-        return null;
+
+        return new Iterator<>() {
+            boolean isCalled = true;
+            private Node current = head;
+            private Node previous;
+
+            @Override
+            public boolean hasNext() {
+                return current.next != null;
+
+            }
+
+            @Override
+            public Object next() {
+                if (! hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                previous = current;
+                current = current.next;
+                isCalled = false;
+                return current.data;
+            }
+
+            @Override
+            public void remove() {
+                if (current == null || isCalled) {
+                    throw new IllegalStateException();
+                }
+
+                previous.next = current.next;
+                current = previous;
+                size--;
+                isCalled = true;
+            }
+        };
+    }
+
+    private static class Node {
+        Object data;
+        Node next;
+
+        Node(Object data, Node next) {
+            this.data = data;
+            this.next = next;
+        }
+
+        @Override
+        public String toString() {
+            return "[" + data + ']';
+        }
+
+
     }
 }
