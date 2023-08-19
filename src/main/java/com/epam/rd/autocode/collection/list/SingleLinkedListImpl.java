@@ -6,25 +6,25 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class SingleLinkedListImpl implements List {
-    private final Node head;
-    int size;
+    private static Node head = null;
 
 
     public SingleLinkedListImpl() {
         head = new Node(0, null);
+        Size.size = 0;
     }
-
 
     @Override
     public void clear() {
         head.next = null;
-        size = 0;
+        Size.size = 0;
     }
 
     @Override
     public int size() {
-        return size;
+        return Size.size;
     }
+
 
     /**
      * Inserts the specified element at the <b>front</b> of this list
@@ -38,7 +38,7 @@ public class SingleLinkedListImpl implements List {
             throw new NullPointerException();
         }
         head.next = new Node(el, head.next);
-        size++;
+        Size.size++;
 
         return true;
     }
@@ -54,7 +54,7 @@ public class SingleLinkedListImpl implements List {
             if (Objects.equals(current.next.data, el)) {
                 Node removedNode = current.next;
                 current.next = current.next.next;
-                size--;
+                Size.size--;
                 return Optional.of(removedNode.data);
             }
             current = current.next;
@@ -65,7 +65,7 @@ public class SingleLinkedListImpl implements List {
 
     @Override
     public Object get(int index) {
-        if (index < 0 || index >= size) {
+        if (index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException();
         }
 
@@ -145,19 +145,20 @@ public class SingleLinkedListImpl implements List {
 
                 previous.next = current.next;
                 current = previous;
-                size--;
+                Size.size--;
                 isCalled = true;
             }
         };
     }
 
-    private static class Node {
+    public static class Node {
         Object data;
         Node next;
 
         Node(Object data, Node next) {
             this.data = data;
             this.next = next;
+
         }
 
         @Override
@@ -165,6 +166,11 @@ public class SingleLinkedListImpl implements List {
             return "[" + data + ']';
         }
 
-
     }
+
+    static class Size {
+        public static int size;
+    }
+
 }
+

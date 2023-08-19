@@ -5,6 +5,7 @@ import java.util.Optional;
 
 public interface List extends Iterable<Object> {
 
+
     /**
      * Removes all elements from this list.
      */
@@ -15,7 +16,9 @@ public interface List extends Iterable<Object> {
      *
      * @return the number of elements in this list.
      */
-    int size();
+    default int size() {
+        return 0;
+    }
 
     /**
      * Inserts the specified element to this list
